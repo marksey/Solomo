@@ -16,6 +16,8 @@ def dashboard(request):
 
 	return render_to_response("dashboard_1.html")
 
+
+
 def navigation(request):
 
 	 oauth_verifier = request.GET['oauth_verifier']

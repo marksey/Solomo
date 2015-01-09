@@ -1,0 +1,38 @@
+
+#status .row {
+    margin-bottom:10px;
+}
+
+#status p {
+    margin-left:26px;
+    display:inline;
+}
+
+#time-left-wrapper {
+    
+    margin-top:20px;
+    margin-bottom:20px;
+    width:160px;
+    margin-left:15px;
+ 
+}
+
+#time-left {
+    
+    display:block;
+}
+
+.time-header {
+    font-size:18px;
+}
+
+
+.settings-values {
+    float:right;    
+}
+
+.text-muted.status-started {
+  background: transparent url(/static/img/activity-loader.gif) no-repeat right center;
+  padding-right: 20px;
+}
+

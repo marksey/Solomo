@@ -25,6 +25,13 @@
     <link href="{% static 'css/sass/animate.css' %}" rel="stylesheet">
     <link href="{% static 'css/sass/style.css' %}" rel="stylesheet">
 
+    <link href="{% static 'css/sass/follow_bot/hashtags.css' %}" rel="stylesheet">
+
+
+    <link href="{% static 'css/sass/plugins/dataTables/dataTables.bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/sass/plugins/dataTables/dataTables.tableTools.min.css' %}" rel="stylesheet">
+
+
 
 
 </head>
@@ -70,15 +77,32 @@
                         </div>
                     </li>
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> 
+                        <a href="/login"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> 
                         
                     </li>
                     
+                     <li>
+                        <a href="/follow_bot"><i class="fa fa-users"></i> <span class="nav-label">Auto Follow</span></a>
+                 
+                    </li>
+
                     <li>
                         <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Customers</span></a>
                  
                     </li>
 
+
+                    <li>
+                        <a href="/follow_bot"><i class="fa fa-user"></i> 
+                            <span class="nav-label">Increase Followers</span> 
+                        </a>
+                    </li>
+
+                    <li  class="active">
+                        <a href="/twitter_analytics"><i class="fa fa-area-chart"></i> 
+                            <span class="nav-label">Twitter Analytics</span> 
+                        </a>
+                    </li>
                  
                     <li >
                         <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Rewards & Offers</span></a>
@@ -222,7 +246,7 @@
         <div class="row  border-bottom white-bg dashboard-header">
 
             <div class="col-sm-6">
-                <h2>Welcome, Steve.</h2>
+                <h2>Welcome, Sonny.</h2>
                 <small>You have 16 messages and 6 notifications.</small>
             </div>
 
@@ -269,9 +293,29 @@
                             <i class="fa fa-wrench"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Change location</a>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-building-o"></i>
+                                    Change location
+                                </a>
                             </li>
-                            <li><a href="#">Change hashtags</a>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-refresh"></i> 
+                                    Reload tweets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-search"></i> 
+                                    Set radius
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-clock-o"></i> 
+                                    Time filter
+                                </a>
                             </li>
                         </ul>
                         <a class="close-link">
@@ -292,344 +336,303 @@
                     <div style="height:500px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;" class="google-map" id="map2">
                         <div id="map-canvas" style="width: 100%; height: 100%"></div>
                     </div>
+                    <h5>Percent Geo Conquered</h5>
+                    <div class="progress progress-striped active">
+                        <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-danger">
+                            <span class="sr-only">40% Complete (success)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                <i class="fa fa-comments"></i>
+                                Select Hashtags  
+                            </h5>
 
-        <div class="row">
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Import from Follow Bot</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="ibox-content">
+
+                            <div id="tagBody"></div>
+                            <div class="input-append">
+                              <input id="inpAddTags" type="text">
+                              <div class="btn-group">
+                                      <button id="addTag" class="btn btn-danger btn-add-tags" tabindex="-1">Add</button>
+                                      <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                              <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                              <li><a href="#" class="btn-del-tags" data-original-title="" title="">Delete all tags</a></li>
+                                      </ul>
+                              </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+            </div>
+
+
+
             <div class="col-lg-12">
-                <div class="wrapper wrapper-content">
-                        <div class="row">
-                       
-                            <div class="col-lg-6">
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-title">
-                                        <h5>Your daily feed</h5>
-                                        <div class="ibox-tools">
-                                            <span class="label label-warning-light">10 Updates</span>
-                                           </div>
-                                    </div>
-                                    <div class="ibox-content">
-
-                                        <div>
-                                            <div class="feed-activity-list">
-
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="{% static 'img/sass/profile.jpg' %}">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">5m ago</small>
-                                                        <strong><a href="#">@Monica Smith</a></strong> completed a new <a href="#">survey</a>. <br><br>
-                                                        <small class="block text-muted">
-                                                            <i class="fa fa-map-marker"></i>
-                                                            3 mi away 
-                                                        </small> 
-                                                        
-
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="{% static 'img/sass/a2.jpg' %}">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong><a href="#">@Mark Johnson</a></strong> replied to your tweet<br>
-                                                          <div class="well">
-                                                            Ok, perfect. I'll let you know when I complete the survey!
-                                                        </div>
-                                                        <div class="pull-right">
-                                                            <button class="btn btn-xs btn-white reply" data-toggle="modal" data-target="#myModal">
-                                                                <i class="fa fa-mail-reply"></i>
-                                                                 Reply 
-                                                             </button>
-                                                        </div>
-                                                        <br>
-                                                        <small class="block text-muted">
-                                                            <i class="fa fa-map-marker"></i>
-                                                            1 mi away 
-                                                        </small> 
-                                                    </div>
-
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="{% static 'img/sass/a3.jpg' %}">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong><a href="#">@Janet Rosowski</a></strong> started following you.  <br><br>
-                                                        <small class="block text-muted">
-                                                            <i class="fa fa-map-marker"></i>
-                                                            4 mi away 
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                                
-                                                
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="{% static 'img/sass/profile.jpg' %}">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">23h ago</small>
-                                                        <strong><a href="#">@Monica Smith</a></strong> replied to your tweet <br>
-                                                        <div class="well">
-                                                            I'm really craving some beer. Someone please recommend a spot, ASAP!
-                                                        </div>
-                                                        <div class="pull-right">
-                                                            <button class="btn btn-xs btn-white reply" data-toggle="modal" data-target="#myModal">
-                                                                <i class="fa fa-mail-reply"></i>
-                                                                 Reply 
-                                                             </button>
-                                                        </div>
-                                                        <br>
-                                                        <small class="block text-muted">
-                                                            <i class="fa fa-map-marker"></i>
-                                                            1 mi away 
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="{% static 'img/sass/a7.jpg' %}">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">46h ago</small>
-                                                        <strong><a href="#">@Mike Loreipsum</a></strong> completed a new <a href="#">survey</a>.<br>
-                                                        <br>
-                                                        <small class="block text-muted">
-                                                            <i class="fa fa-map-marker"></i>
-                                                            2 mi away 
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
-
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        
-                            <div class="col-lg-6">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-title">
-                                    <h5>Latest tweets near Red Rabbit</h5>
-                                    <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            <i class="fa fa-wrench"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="#">Config option 1</a>
-                                            </li>
-                                            <li><a href="#">Config option 2</a>
-                                            </li>
-                                        </ul>
-                                        <a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ibox-content no-padding">
-                                    <ul class="list-group">
-
-                                        <li class="list-group-item">
-                                            <p>
-                                                <a class="text-info" href="#">@alanmarry</a>
-                                                 Where can I find good pizza in Sacramento?
-                                             </p>
-
-                                            <div class="pull-right">
-                                                <div class="btn-group">
-                                                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Action 
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#myModal" data-toggle="modal" >Reply</a></li>
-                                                        <li><a href="#">Favorite</a></li>
-                                                        <li><a href="#">Locate on Map</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#" class="del-customer">Delete Customer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <small class="block text-muted">
-                                                <i class="fa fa-clock-o"></i> 
-                                                15m ago &nbsp;
-                                                <i class="fa fa-map-marker"></i>
-                                                3 mi away 
-                                                &nbsp;
-                                                <a href="#"class="fa fa-user" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right"></a>
-                                             </small> 
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <p>
-                                                <a class="text-info" href="#">@stockman69</a> Ermegehrd! I'm soo craving a slice of heavenly from pizza shack!
-                                            </p>
-
-                                            <div class="pull-right">
-                                                <div class="btn-group">
-                                                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Action 
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Reply</a></li>
-                                                        <li><a href="#">Favorite</a></li>
-                                                        <li><a href="#">Locate on Map</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#" class="del-customer">Delete Customer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            
-                                            <small class="block text-muted">
-                                                <i class="fa fa-clock-o"></i>
-                                                 30m ago &nbsp;
-                                                <i class="fa fa-map-marker"></i>
-                                                 1 mi away
-                                                 &nbsp;
-                                                <a href="#"class="fa fa-user" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right"></a>
-                                            </small>
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <p>
-                                                <a class="text-info" href="#">@Kevin Smith</a> Anyone know where I can find some good sausage?
-                                            </p>
-
-                                            <div class="pull-right">
-                                                <div class="btn-group">
-                                                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Action 
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Reply</a></li>
-                                                        <li><a href="#">Favorite</a></li>
-                                                        <li><a href="#">Locate on Map</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#" class="add-customer">Add Customer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <small class="block text-muted">
-                                                <i class="fa fa-clock-o"></i> 34m  ago &nbsp;
-                                                <i class="fa fa-map-marker"></i> 5 mi away
-                                            </small>
-                                        </li>
-
-                                        <li class="list-group-item ">
-                                            <p>
-                                                <a class="text-info" href="#">@Jonathan Febrick</a>
-                                                 Well, we had a good family reunion and lots of beer!
-                                            </p>
-
-                                            <div class="pull-right">
-                                               <div class="btn-group">
-                                                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Action 
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Reply</a></li>
-                                                        <li><a href="#">Favorite</a></li>
-                                                        <li><a href="#">Locate on Map</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#" class="add-customer">Add Customer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <small class="block text-muted">
-                                                <i class="fa fa-clock-o"></i>
-                                                47m ago &nbsp;
-                                                <i class="fa fa-map-marker"></i>
-                                                7 mi away
-                                            </small>
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <p>
-                                                <a class="text-info" href="#">@Alan Marry</a>
-                                                 Trying to decide where to eat dinner tonight.
-                                             </p>
-
-                                             <div class="pull-right">
-                                                <div class="btn-group">
-                                                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Action 
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Reply</a></li>
-                                                        <li><a href="#">Favorite</a></li>
-                                                        <li><a href="#">Locate on Map</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#" class="del-customer">Delete Customer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <small class="block text-muted">
-                                                <i class="fa fa-clock-o"></i>
-                                                1h ago &nbsp;
-                                                <i class="fa fa-map-marker"></i>
-                                                2 mi away
-                                                &nbsp;
-                                                <a href="#"class="fa fa-user" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right"></a>
-                                            </small>
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <p>
-                                                <a class="text-info" href="#">@Kevin Smith</a>
-                                                 Going to meet my bestie for macarons!
-                                            </p>
-
-                                            <div class="pull-right">
-                                                <div class="btn-group">
-                                                    <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Action 
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Reply</a></li>
-                                                        <li><a href="#">Favorite</a></li>
-                                                        <li><a href="#">Locate on Map</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#" class="add-customer">Add Customer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <small class="block text-muted">
-                                                <i class="fa fa-clock-o"></i>
-                                                2h  ago &nbsp;
-                                                <i class="fa fa-map-marker"></i>
-                                                4 mi away
-                                            </small>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Twitter users from map.</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
                         </div>
-                        </div>
+                    </div>
 
+                    <div class="ibox-content">
 
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline"><div class="DTTT_container"><a class="DTTT_button DTTT_button_copy" id="ToolTables_DataTables_Table_0_0" tabindex="0" aria-controls="DataTables_Table_0"><span>Copy</span><div style="position: absolute; left: 0px; top: 0px; width: 45px; height: 29px; z-index: 99;"><embed id="ZeroClipboard_TableToolsMovie_1" src="js/plugins/dataTables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="45" height="29" name="ZeroClipboard_TableToolsMovie_1" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=1&amp;width=45&amp;height=29" wmode="transparent"></div></a><a class="DTTT_button DTTT_button_csv" id="ToolTables_DataTables_Table_0_1" tabindex="0" aria-controls="DataTables_Table_0"><span>CSV</span><div style="position: absolute; left: 0px; top: 0px; width: 38px; height: 29px; z-index: 99;"><embed id="ZeroClipboard_TableToolsMovie_2" src="js/plugins/dataTables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="38" height="29" name="ZeroClipboard_TableToolsMovie_2" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=2&amp;width=38&amp;height=29" wmode="transparent"></div></a><a class="DTTT_button DTTT_button_xls" id="ToolTables_DataTables_Table_0_2" tabindex="0" aria-controls="DataTables_Table_0"><span>Excel</span><div style="position: absolute; left: 0px; top: 0px; width: 44px; height: 29px; z-index: 99;"><embed id="ZeroClipboard_TableToolsMovie_3" src="js/plugins/dataTables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="44" height="29" name="ZeroClipboard_TableToolsMovie_3" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=3&amp;width=44&amp;height=29" wmode="transparent"></div></a><a class="DTTT_button DTTT_button_pdf" id="ToolTables_DataTables_Table_0_3" tabindex="0" aria-controls="DataTables_Table_0"><span>PDF</span><div style="position: absolute; left: 0px; top: 0px; width: 39px; height: 29px; z-index: 99;"><embed id="ZeroClipboard_TableToolsMovie_4" src="js/plugins/dataTables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="39" height="29" name="ZeroClipboard_TableToolsMovie_4" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=4&amp;width=39&amp;height=29" wmode="transparent"></div></a><a class="DTTT_button DTTT_button_print" id="ToolTables_DataTables_Table_0_4" title="View print view" tabindex="0" aria-controls="DataTables_Table_0"><span>Print</span></a></div><div class="clear"></div><div class="dataTables_length" id="DataTables_Table_0_length"><label><select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> followers per page</label></div>
+
+                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                        <label style="margin-right:15px;">Search:
+                            <input type="search" class="form-control input-sm" placeholder="Looking for tags?" aria-controls="DataTables_Table_0">
+                        </label>
+                    </div>
+                        <table class="table table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                    <thead>
+                    <tr role="row">
+
+                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 143px;">
+                            <i class="fa fa-user"></i>
+                            Twitter username
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 355px;">
+                            <i class="fa fa-comment"></i>
+                            What they're saying
+                        </th>
+                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 125px;">
+                            <i class="fa fa-tags"></i>
+                            Tags
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 106px;">
+                            <i class="fa fa-map-marker"></i>
+                            Location
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 116px;">
+                            <i class="fa fa-clock-o"></i>
+                            Last Tweeted
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 83px;">
+                            <i class="fa fa-group"></i>
+                            Followers
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    
+                    <tr class="gradeA odd" role="row">
+                        <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/487071728535748609/VEXdKzRM_normal.jpeg ">
+                            <a href="http://www.twitter.com/pizzadan">
+                                @pizzadan
+                            </a>
+                        </td>
+                        <td>
+                            <a href="https://twitter.com/PizzaDan/status/552876956258410498">
+                                Who wants pizza?
+                            </a>
+                        </td>
+                        <td>Pizza</td>
+                        <td>5 miles away</td>
+                        <td class="center">23 hours ago</td>
+                        <td class="center">149</td>
+                    </tr><tr class="gradeA even" role="row">
+                        <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/553050424907796480/DVmK2m0v_normal.jpeg ">
+                            <a href="http://www.twitter.com/threadsforgents">@WildOppa</a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                Chinese food
+                            </a>
+                        </td>
+                        <td>Chinese</td>
+                        <td>2.5 miles away</td>
+                        <td class="center">3 hours ago</td>
+                        <td class="center">458</td>
+                    </tr><tr class="gradeA odd" role="row">
+                        <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/551694704719310848/urzj49ja_normal.jpeg ">
+                            <a href="http://www.twitter.com/pizzadan">
+                                @gordongecko
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                I'm hungry! Where's a good joint for burgers?
+                            </a>
+                        </td>
+                        <td>Burgers</td>
+                        <td>0.5 miles away</td>
+                        <td class="center">17 mins ago</td>
+                        <td class="center">382</td>
+                    </tr><tr class="gradeA even" role="row">
+                        <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/552618168829493248/bMo7Tlfz_normal.jpeg ">
+                            <a href="http://www.twitter.com/pizzadan">
+                                @forrestgary
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                @TankHouse we have a great table set up!
+                            </a>
+                        </td>
+                        <td>Tank House</td>
+                        <td>1.4 miles away</td>
+                        <td class="center">14 mins ago</td>
+                        <td class="center">97</td>
+                    </tr><tr class="gradeA odd" role="row">
+                         <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/487071728535748609/VEXdKzRM_normal.jpeg ">
+                            <a href="http://www.twitter.com/pizzadan">
+                                @CDKennewag
+                            </a>
+                        </td>
+                        <td>
+                            <a href="https://twitter.com/PizzaDan/status/552876956258410498">
+                                Who wants pizza?
+                            </a>
+                        </td>
+                        <td>Pizza</td>
+                        <td>5 miles away</td>
+                        <td class="center">23 hours ago</td>
+                        <td class="center">149</td>
+                    </tr><tr class="gradeA even" role="row">
+                        <td class="sorting_1">
+                             <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/549292809262342144/Cd02QWe0_normal.jpeg ">
+                            <a href="http://www.twitter.com/threadsforgents">@dagothequeen</a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                Mexican food is bomb. @RedRabbit
+                            </a>
+                        </td>
+                        <td>Mexican food</td>
+                        <td>2.5 miles away</td>
+                        <td class="center">3 hours ago</td>
+                        <td class="center">458</td>
+                    </tr><tr class="gradeA odd" role="row">
+                        <td class="sorting_1">
+                             <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/550901968764293120/EGVRGPWY_normal.jpeg ">
+                            <a href="http://www.twitter.com/pizzadan">
+                                @steinertrek
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                Hella want baked pasta
+                            </a>
+                        </td>
+                        <td>Pasta</td>
+                        <td>3.5 miles away</td>
+                        <td class="center">54 mins ago</td>
+                        <td class="center">397</td>
+                    </tr><tr class="gradeA even" role="row">
+                         <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/533956536079376384/34uZi-Yn_normal.jpeg ">
+                            <a href="http://www.twitter.com/threadsforgents">@blackspade93</a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                Hole in the wall pub. Drinking #coronas
+                            </a>
+                        </td>
+                        <td>Coronas</td>
+                        <td>1.3 miles away</td>
+                        <td class="center">2 hours ago</td>
+                        <td class="center">108</td>
+                    </tr><tr class="gradeA odd" role="row">
+                        <td class="sorting_1">
+                             <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/2765453429/249c53dcf2411abbda26873d1e626cec_normal.jpeg ">
+                            <a href="http://www.twitter.com/pizzadan">
+                                @mattmount
+                            </a>
+                        </td>
+                        <td>
+                            <a href="https://twitter.com/PizzaDan/status/552876956258410498">
+                                I love cupcakes from Starbucks!
+                            </a>
+                        </td>
+                        <td>cupcakes</td>
+                        <td>5 miles away</td>
+                        <td class="center">27 hours ago</td>
+                        <td class="center">349</td>
+                    </tr><tr class="gradeA even" role="row">
+                        <td class="sorting_1">
+                            <img alt="image" height="50%" width="20%" class="img-circle" src="http://pbs.twimg.com/profile_images/521177660945227776/PmB6lNU-_normal.png ">
+                            <a href="http://www.twitter.com/threadsforgents">@angels13</a>
+                        </td>
+                        <td>
+                            <a href="#https://twitter.com/PizzaDan/status/552876956258410498">
+                                Who wants to grab lunch? #LowBrau
+                            </a>
+                        </td>
+                        <td>lunch</td>
+                        <td>5.4 miles away</td>
+                        <td class="center">26 hours ago</td>
+                        <td class="center">218</td>
+                    </tr></tbody>
+                    <tfoot>
+                    <tr>
+                        <th rowspan="1" colspan="1">Twitter username</th>
+                        <th rowspan="1" colspan="1">What they're saying</th>
+                        <th rowspan="1" colspan="1">Tags</th>
+                        <th rowspan="1" colspan="1">Location</th>
+                        <th rowspan="1" colspan="1">Last Tweeted</th>
+                        <th rowspan="1" colspan="1">Followers</th>
+                    </tr>
+                    </tfoot>
+                    </table><div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous"><a href="#">Previous</a></li><li class="paginate_button active" aria-controls="DataTables_Table_0" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="DataTables_Table_0" tabindex="0"><a href="#">2</a></li><li class="paginate_button " aria-controls="DataTables_Table_0" tabindex="0"><a href="#">3</a></li><li class="paginate_button " aria-controls="DataTables_Table_0" tabindex="0"><a href="#">4</a></li><li class="paginate_button " aria-controls="DataTables_Table_0" tabindex="0"><a href="#">5</a></li><li class="paginate_button " aria-controls="DataTables_Table_0" tabindex="0"><a href="#">6</a></li><li class="paginate_button next" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_next"><a href="#">Next</a></li></ul></div></div>
+
+                    </div>
                 </div>
+            </div> 
+
+
+
                 <div class="footer">
                     <div class="pull-right">
                         10GB of <strong>250GB</strong> Free.
@@ -695,13 +698,22 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn_onwOd4Pf03N4Ohzci-OSmTnwFry97o">
     </script>
 
+    <script src="{% static 'js/sass/plugins/dataTables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'js/sass/plugins/dataTables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'js/sass/plugins/dataTables/dataTables.tableTools.min.js' %}"></script>
+
+    <script src="{% static 'js/sass/follow_bot/hashtags.js' %}"></script>
+
+
+
+
     <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog">
                                 <div class="modal-content animated bounceInRight">
 
 <div class="ibox-content">
 
-                        <div>
+            <div>
                 <div class="chat-activity-list">
 
                     <div class="chat-element">
@@ -784,7 +796,7 @@
 
             var myLatitude = 38.575655;
             var myLongitude = -121.480336;
-            var radiusMiles = 4;
+            var radiusMiles = 10;
 
             var mapOptions = {
                 zoom: 13,
@@ -823,12 +835,23 @@
 
              for (i = 0; i < local_tweets.length; i++) { 
 
-                 
+                
+                if (i % 2 == 0)
+                {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(local_tweets[i]['latitude'], local_tweets[i]['longitude']),
+                        map: map,
+                        icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png'
+                    });
 
-                  marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(local_tweets[i]['latitude'], local_tweets[i]['longitude']),
-                    map: map
-                 });
+                } else {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(local_tweets[i]['latitude'], local_tweets[i]['longitude']),
+                        map: map
+                    });
+                }
+
+                 
 
                 
 

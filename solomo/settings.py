@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'helloworld',
     'utilities',
+    'follow_bot',
 )
 
 MIDDLEWARE_CLASSES = (
